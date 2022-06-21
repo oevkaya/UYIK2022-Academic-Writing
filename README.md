@@ -11,3 +11,11 @@ Akademik yazım açısından elimizde ne gibi araçlar var. Her zaman word ile y
 3. Akademik yazım/raporlama için elimizde başka neler var ? 
 4. R ortamında akademik yazım: Rmarkdown temel özellikleri
 5. Rmarkdown ve ötesine dair
+
+### Kursa dair
+
+- Toplam Kurs Saati: 3 Saat
+
+- Kurs Tarihi: 21 Haziran 2022
+
+- Kurs Saati: 19:00
