@@ -14,7 +14,7 @@ Akademik yazım açısından elimizde ne gibi araçlar var. Her zaman word ile y
 
 ### Kursa dair
 
-- Toplam Kurs Saati: 3 Saat
+- Toplam Kurs Saati: 2 Saat
 
 - Kurs Tarihi: 21 Haziran 2022
 
