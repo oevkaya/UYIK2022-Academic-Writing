@@ -1,0 +1,141 @@
+---
+title: "Rmarkdown course - practical"
+subtitle: "Overview and tasks"
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    includes:
+      in_header: header.tex
+bibliography: Biblio_Example.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(pander)
+library(kableExtra)
+```
+
+\newpage
+
+# Intro
+
+This document lists the available example-documents, provides tasks and serves as an example-rmarkdown-document in itself.
+
+A good way to learn rmarkdown is to take a look at the pdf-version and try to recreate it.
+
+# Overview material
+
+ - The slides (RmarkdownSlides.pdf) contain an overview, example-code and -output and **a lot of links to additional material**. If you can't find what you need in the slides or the provided links, check [stackoverflow](https://stackoverflow.com/questions/tagged/r-markdown)
+ - An example of a latex header-file is header.tex (used for this document as well)
+ - Formatting word output:
+     - run *WordExample.rmd*
+     - add *reference_docx: WordTemplate.docx* to the YAML-header
+     - run WordExample.rmd again
+ - Repeated section:
+     - open, inspect and run *Ex1_RepeatedSection_P.rmd*
+     - *Ex1_RepeatedSection_C.rmd* is the 'child'-rmd that is repeated in the for loop
+     - *Ex1B_RepeatedSection_P.rmd* and *Ex1B_RepeatedSection_C.rmd* provide a slightly different example
+ - Repeated report:
+     - open, inspect an run *Ex2_AutomatedReport_M.R*
+     - *Ex2_AutomatedReport_R.Rmd* is the rmarkdown file that produces each seperate report
+
+     
+# Some examples
+
+This sections presents some examples.
+
+
+\blandscape
+
+## A landscape page
+
+
+```{r}
+
+Nrow <- 6
+Ncol <- 3
+
+pander(mtcars[1:Nrow,1:Ncol], 
+       caption = "A part of the cars data")
+
+```
+
+
+\elandscape
+
+## A table, a graph and some inline-R-code
+
+
+The table on the landscape page presented only `r Nrow` of the `r nrow(cars)` rows and only `r  Ncol` of the `r ncol(cars)` columns. Here is a fancy kableExtra version of the same table
+
+
+
+```{r}
+
+kable(mtcars[1:Nrow,1:Ncol]%>%
+        arrange(cyl)%>%
+        mutate(mpg = cell_spec(mpg, format = "latex", angle = ifelse(mpg > 21, 30, 0))), 
+        booktabs = TRUE, linesep = "", escape = FALSE)%>%
+  kable_styling(latex_options = "striped")
+  
+
+```
+
+
+On the same page a graph:
+
+```{r, fig.height= 3, fig.width=3, fig.cap="a nice mtcars-graph", fig.align="left"}
+
+ggplot(mtcars, aes(hp, mpg, color = factor(cyl)))+
+  geom_point()+
+  theme_bw()
+
+```
+
+## A citation
+
+Here is a citation from the example bibliography: [@ahnRandomizedTrialStents2015]
+
+
+\newpage
+
+# Tasks
+
+(notice this starts on a new page)
+
+  1. Open the Rmd-examples
+     
+     - check if you understand the code
+     - run the markdown, check if it runs without errors
+     
+  2. Start from scratch:
+  
+     - Open a new rmarkdown
+     - Adapt the yaml-header such that
+        + there is a table of contents up to only 1 level (so excluding 3.1 or 3.1.a)
+        + sections are numbered
+     - Make a document with three sections:
+        + Section 1:
+           - a ggplot-graph with the mtcars-dataset, you can choose
+           - exactly the same graph, but much bigger and right aligned
+           - an external png
+           - create a new subsection for each of the graphs
+        + Section 2:
+           - starts on a new page
+           - Two subsections. In each of these subsections, recreate (starting from mtcars) one of the two tables on p. 14 of the [kableExtra vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pdf.pdf)
+       + Section 3:
+          - Automate the production of a separate subsection for the set of cars with the same number of cylinders (variable cyl)
+          - Each subsection contains a graph of hp vs mpg
+      + Check with the solution. Play around with every parameter/piece of code you can find and check the result
+    
+
+
+\newpage
+
+# Example-Bibliography
